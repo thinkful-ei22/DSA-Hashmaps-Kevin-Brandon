@@ -63,7 +63,7 @@ class HashMap{
   _findSlot(key) {
     // console.log(key, 'key');
     const hash = HashMap._hashString(key);
-    // console.log(hash,'hash');
+    // console.log(hash, key);
     const start = hash % this._capacity;
     // console.log(start, 'start');
 
