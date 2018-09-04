@@ -50,9 +50,9 @@ function main (){
 
   console.log(lor.get('Hobbit'));
 
-  console.log(lor);
+  // console.log(lor);
 
-  // console.log(isPalindrome('add'));
+  console.log(isPalindrome('acecarr'));
 }
 
 main();

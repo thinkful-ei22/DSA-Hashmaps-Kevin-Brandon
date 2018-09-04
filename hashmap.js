@@ -24,7 +24,7 @@ class HashMap{
 
   get(key){
     const index = this._findSlot(key);
-    // console.log(index, 'ind');
+    //  console.log(index, 'ind');
     if (this._slots[index] === undefined){
       throw new Error('Key error');
     }
@@ -61,11 +61,11 @@ class HashMap{
   }
 
   _findSlot(key) {
-    console.log(key, 'key');
+    // console.log(key, 'key');
     const hash = HashMap._hashString(key);
-    console.log(hash,'hash');
+    // console.log(hash,'hash');
     const start = hash % this._capacity;
-    console.log(start, 'start');
+    // console.log(start, 'start');
 
     for (let i = start; i < start + this._capacity; i++){
       const index = i % this._capacity;
