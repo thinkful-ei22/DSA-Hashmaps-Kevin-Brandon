@@ -1,4 +1,4 @@
-'use strict';
+
 
 class HashMap{
   constructor (initialCapacity=8){
@@ -6,12 +6,15 @@ class HashMap{
     this._slots = [];
     this._capacity = initialCapacity;
     this._deleted = 0;
+    this.MAX_LOAD_RATIO = 0.6;
+    this.SIZE_RATIO = 3;
   }
 
   static _hashString(string){
+    console.log(string, 'hashed string');
     let hash = 5381;
 
-    for (let i=0; i<string.length; i++) {
+    for (let i = 0; i < string.length; i++) {
       hash = (hash << 5) + hash + string.charCodeAt(i);
       hash = hash & hash;
     }
@@ -21,6 +24,7 @@ class HashMap{
 
   get(key){
     const index = this._findSlot(key);
+    console.log(index, 'ind');
     if (this._slots[index] === undefined){
       throw new Error('Key error');
     }
@@ -29,8 +33,8 @@ class HashMap{
 
   set (key, value) {
     const loadRatio = (this.length + this._deleted + 1) / this._capacity;
-    if (loadRatio > HashMap.MAX_LOAD_RATIO) {
-      this._resize(this._capacity * HashMap.SIZE_RATIO);
+    if (loadRatio > this.MAX_LOAD_RATIO) {
+      this._resize(this._capacity * this.SIZE_RATIO);
     }
 
     const index = this._findSlot(key);
@@ -54,11 +58,15 @@ class HashMap{
   }
 
   _findSlot(key) {
+    console.log(key, 'key');
     const hash = HashMap._hashString(key);
+    console.log(hash,'hash');
     const start = hash % this._capacity;
+    console.log(start, 'start');
 
-    for (let i=start; i<start + this._capacity; i++){
+    for (let i = start; i < start + this._capacity; i++){
       const index = i % this._capacity;
+      // console.log(index, 'ind of %');
       const slot = this._slots[index];
 
       if (slot === undefined || (slot.key === key && !slot.deleted)){
