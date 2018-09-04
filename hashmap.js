@@ -1,4 +1,4 @@
-
+'use strict';
 
 class HashMap{
   constructor (initialCapacity=8){
@@ -11,7 +11,7 @@ class HashMap{
   }
 
   static _hashString(string){
-    console.log(string, 'hashed string');
+    // console.log(string, 'hashed string');
     let hash = 5381;
 
     for (let i = 0; i < string.length; i++) {
@@ -24,7 +24,7 @@ class HashMap{
 
   get(key){
     const index = this._findSlot(key);
-    console.log(index, 'ind');
+    // console.log(index, 'ind');
     if (this._slots[index] === undefined){
       throw new Error('Key error');
     }
@@ -43,7 +43,10 @@ class HashMap{
       value,
       deleted: false
     };
-    this.length++;
+    if (this._slots[index]){
+      this.length++;
+    }
+
   }
 
   remove(key){
